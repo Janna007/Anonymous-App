@@ -6,7 +6,7 @@ type connetionObject={
 
 const connection :connetionObject={}
 
-async function dbConnect(){
+async function dbConnect():Promise<void>{
 
          if(connection.isConnected){
             console.log("DB already connected") 
