@@ -49,3 +49,43 @@ export async function POST(request:Request){
     }
 
 }
+
+
+export async function GET(request:Request) {
+    await dbConnect()
+
+     const session =await getServerSession(authOptions)
+     const user=session?.user
+
+     if(!session || !user){
+        return Response.json({
+            success:false,
+            message:"Not authenticated!!Please Signup"
+        },{status:404})
+     }
+     
+     const userId=user._id
+
+     try {
+
+        const user=await UserModel.findById(userId)
+        if(!user){
+            return Response.json({
+                success:false,
+                message:"User not found"
+            },{status:404})
+        }
+
+        return Response.json({
+            success:true,
+            isAcceptingMessage:user.isAcceptingMessage
+        },{status:200})
+        
+     } catch (error) {
+        console.log("Error to get the user accepting state")
+        return Response.json({
+            success:false,
+            message:"Error to get the user accepting state"
+        },{status:500})
+     }
+}
