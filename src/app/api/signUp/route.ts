@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs'
 
 
 
-export async function GET(request:Request) {
+export async function POST(request:Request) {
     try {
         dbConnect()
         const reqBody=await request.json()
@@ -79,6 +79,7 @@ export async function GET(request:Request) {
 
              //send verification email
             const emailResponse= await sendVerificationEmail(username,email,verifyCode)
+            console.log(emailResponse)
 
             if(!emailResponse.success){
                  return Response.json({
