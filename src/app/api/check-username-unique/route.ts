@@ -33,7 +33,7 @@ export async function GET(request:Request){
                 isVerified:true
                 }
             )
-
+            
             if(existingUser){
                 return Response.json({
                     success:false,
@@ -50,10 +50,6 @@ export async function GET(request:Request){
               );
 
 
-            return Response.json({
-                success:true,
-                data:result
-            },{status:200})
            } catch (error) {
             console.log("Error while checking unique username",error)
             return Response.json({
