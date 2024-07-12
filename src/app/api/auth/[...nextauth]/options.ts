@@ -43,21 +43,16 @@ export const authOptions:NextAuthOptions={
                   throw new Error("Check your password again!!")
                   
                 }
-      
-      
              } catch (error:any) {
                 throw new Error(error)
              }
-             
-           
-          
           }
         })
       ],
       callbacks:{
         async jwt({ token, user }) {
           if(user){
-            token._id=user._id;
+            token._id=user._id?.toString();
             token.username=user.username
             token.isVerified=user.isVerified
             token.isAcceptingMessage=user.isAcceptingMessage
